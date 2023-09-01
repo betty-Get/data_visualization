@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { CiSearch } from "react-icons/ci";
 
 function App() {
   const [data, setData] = useState("");
@@ -20,6 +21,22 @@ function App() {
 
   return (
     <div className="App">
+      <div className="mb-3 grid grid-cols-3">
+        <div className="col-span-2 flex ">
+          <h5 className="m-4">header</h5>
+          <p className="m-4 hidden md:flex">sub header</p>
+          <div className="m-4 w-[70%] mb-4 flex md:w-[50%]">
+            <CiSearch className="absolute text-neutral-500 top-[25px]" />
+            <input
+              type="search"
+              className="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-5 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none "
+              placeholder="Search"
+            />
+          </div>
+        </div>
+        <div className="m-4 hidden md:flex">delete</div>
+      </div>
+
       <div className="w-[550px] lg:w-[900px] xl:w-[1200px] mx-auto">
         <table className="min-w-full overflow-x-scroll">
           <thead className="bg-white border-b">
