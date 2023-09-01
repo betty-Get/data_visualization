@@ -1,73 +1,26 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import Table from "./component/table";
+import React from 'react'
 
-function App() {
-  const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
+function Table({results}) {
+    
+    // sort number
+    //  let x = results.sort( (a,b) => Number(a.id) - Number(b.id));
+    // console.log(x)
+    
+    //sort name
+    // let y = results.sort((a,b) => a.name.localeCompare(b.name));
+    // console.log(y);
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get("https://api.coinlore.net/api/tickers/");
-      setData(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  return (
+    <>
 
-  useEffect(() => {
-    fetchData();
-    return;
-  }, []);
-
-  let key = []
-
-  const handleClick = (e) => {
-     setQuery(e.target.value);
-     //search();
-  }
-
-   const search = (data) => {
-   return data.filter((item)=> item.name.toLowerCase().includes(query.toLowerCase()) || item.id.toLowerCase().includes(query.toLowerCase()) );
-  
-   //setData(searchData);
-
-   }
-
-  return (    
-    <div className="App">
-      <div className="mb-3 grid grid-cols-3">
-        <div className="col-span-2 flex ">
-          <h5 className="m-4">header</h5>
-          <p className="m-4 hidden md:flex">sub header</p>
-          <div className="m-4 w-[70%] mb-4 flex md:w-[50%]">
-            <CiSearch className="absolute text-neutral-500 top-[25px]" />
-            <input
-              type="search"
-              className="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent px-5 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none "
-              placeholder="Search"
-              onChange={handleClick}
-            />
-          </div>
-        </div>
-        <div className="m-4 hidden md:flex">delete</div>
-      </div>
-      <Table results={search(data)}/>
-       {/* <Table results={data}/> */}
-
-      {/* {console.log(data)} */}
-
-      {/* {console.log(search(data))} */}
-
-      {/* <div className="w-[550px] lg:w-[900px] xl:w-[1200px] mx-auto">
-      {data ? (<table className="min-w-full overflow-x-scroll">
+<div className="w-[550px] lg:w-[900px] xl:w-[1200px] mx-auto">
+      {results ? (<table className="min-w-full overflow-x-scroll">
           <thead className="bg-white border-b">
             <tr>
               <th
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-4 py-4 text-left"
-              >
+              > 
                 Id
               </th>
               <th
@@ -109,45 +62,44 @@ function App() {
             </tr>
           </thead>
          
-           {data.map((data) => (
-              <>
-                <tbody>
+           {results.map((result,index) => (
+                <tbody key={index}>
                   <tr
-                    key={data.id}
                     className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
                   >
                     <td className="px-4 py-4  text-sm font-medium text-gray-900">
-                      {data.id}
+                      {result.id}
                     </td>
                     <td className="text-sm text-gray-900 font-light py-4">
-                      {data.name}
+                      {result.name}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-2 py-4 ">
-                      {data.rank}
+                      {result.rank}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-2 py-4 ">
-                      {data.price_usd}
+                      {result.price_usd}
                     </td>
                     <td className="text-sm text-gray-900 font-light py-2 ">
-                      {data.percent_change_24h}
+                      {result.percent_change_24h}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-2 py-4 ">
-                      {data.price_btc}
+                      {result.price_btc}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-2 py-4 ">
-                      {data.market_cap_usd}
+                      {result.market_cap_usd}
                     </td>
                   </tr>
                 </tbody>
-              </>
+             
             ))}
           
         </table>) : (
           <p>No record to display</p>
         )}
-      </div> */}
-    </div>
-  );
+      </div>
+      
+    </>
+  )
 }
 
-export default App;
+export default Table
