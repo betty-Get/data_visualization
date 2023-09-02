@@ -4,10 +4,17 @@ import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
 function Table({ results }) {
   const [id, setId] = useState(true);
-  // sort number
+  const [name, setName] = useState(true);
+  const [rank, setRank] = useState(true);
+
+  // sort by id
   const handleSortId = () => {
     setId(!id);
+    // const keys = ["id", "rank"];
     if (id === true) {
+      //   results.sort((a, b) =>
+      //     keys.some((key) => Number(a[key]) - Number(b[key]))
+      //   );
       results.sort((a, b) => Number(a.id) - Number(b.id));
     } else {
       results.sort((a, b) => Number(b.id) - Number(a.id));
@@ -15,8 +22,24 @@ function Table({ results }) {
   };
 
   //sort name
-  // let y = results.sort((a,b) => a.name.localeCompare(b.name));
-  // console.log(y);
+  const handleSortName = () => {
+    setName(!name);
+    if (name === true) {
+      results.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      results.sort((a, b) => b.name.localeCompare(a.name));
+    }
+  };
+
+  const handleRankId = () => {
+    setRank(!rank);
+
+    if (rank === true) {
+      results.sort((a, b) => Number(a.rank) - Number(b.rank));
+    } else {
+      results.sort((a, b) => Number(b.rank) - Number(a.rank));
+    }
+  };
 
   return (
     <>
@@ -45,10 +68,10 @@ function Table({ results }) {
                   <div className="flex px-2">
                     Name
                     <span className="pt-1 pl-1 text-neutral-500">
-                      {id ? (
-                        <AiOutlineArrowDown onClick={handleSortId} />
+                      {name ? (
+                        <AiOutlineArrowDown onClick={handleSortName} />
                       ) : (
-                        <AiOutlineArrowUp onClick={handleSortId} />
+                        <AiOutlineArrowUp onClick={handleSortName} />
                       )}
                     </span>
                   </div>
@@ -57,7 +80,16 @@ function Table({ results }) {
                   scope="col"
                   className="text-sm font-medium text-gray-900 py-4 text-left"
                 >
-                  Rank
+                  <div className="flex">
+                    Rank
+                    <span className="pl-1 pt-1 text-neutral-500">
+                      {rank ? (
+                        <AiOutlineArrowDown onClick={handleRankId} />
+                      ) : (
+                        <AiOutlineArrowUp onClick={handleRankId} />
+                      )}
+                    </span>
+                  </div>
                 </th>
                 <th
                   scope="col"
