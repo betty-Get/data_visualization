@@ -21,28 +21,29 @@ function App() {
     return;
   }, []);
 
-  let key = []
-
   const handleClick = (e) => {
-     setQuery(e.target.value);
-     //search();
-  }
+    setQuery(e.target.value);
+    //search();
+  };
 
-   const search = (data) => {
-   return data.filter((item)=> item.name.toLowerCase().includes(query.toLowerCase()) || item.id.toLowerCase().includes(query.toLowerCase()) );
-  
-   //setData(searchData);
+  const search = (data) => {
+    return data.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query.toLowerCase()) ||
+        item.id.toLowerCase().includes(query.toLowerCase())
+    );
 
-   }
+    //setData(searchData);
+  };
 
-  return (    
+  return (
     <div className="App">
       <div className="mb-3 grid grid-cols-3">
         <div className="col-span-2 flex ">
           <h5 className="m-4">header</h5>
           <p className="m-4 hidden md:flex">sub header</p>
           <div className="m-4 w-[70%] mb-4 flex md:w-[50%]">
-            <CiSearch className="absolute text-neutral-500 top-[25px]" />
+            <CiSearch className="absolute text-neutral-500 top-[32px]" />
             <input
               type="search"
               className="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent px-5 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none "
@@ -53,8 +54,8 @@ function App() {
         </div>
         <div className="m-4 hidden md:flex">delete</div>
       </div>
-      <Table results={search(data)}/>
-       {/* <Table results={data}/> */}
+      <Table results={search(data)} />
+      {/* <Table results={data}/> */}
 
       {/* {console.log(data)} */}
 
