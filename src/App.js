@@ -37,7 +37,6 @@ function App() {
     <div className="App">
       <Navbar handleClick={handleClick} />
       <Table results={search(data)} />
-      {/* <Table results={data}/> */}
     </div>
   );
 }

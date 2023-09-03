@@ -3,8 +3,6 @@ import { useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
 function Table({ results }) {
-  // const [att, setAtt] = useState(true);
-
   const [id, setId] = useState(true);
   const [name, setName] = useState(true);
   const [rank, setRank] = useState(true);
@@ -13,8 +11,8 @@ function Table({ results }) {
   const [priceBtc, setPriceBtc] = useState(true);
   const [marketUsd, setMarketUsd] = useState(true);
 
-  // sort by id
-  const handleSortId = (att, val) => {
+  // sort by number
+  const handleSortNumbers = (att, val) => {
     if (val === "id") {
       setId(!att);
     } else if (val === "rank") {
@@ -45,36 +43,6 @@ function Table({ results }) {
     }
   };
 
-  //sort by rank
-  const handleRankId = () => {
-    setRank(!rank);
-    if (rank === true) {
-      results.sort((a, b) => Number(a.rank) - Number(b.rank));
-    } else {
-      results.sort((a, b) => Number(b.rank) - Number(a.rank));
-    }
-  };
-
-  //sort by price
-  const handlePriceId = () => {
-    setPrice(!price);
-    if (price === true) {
-      results.sort((a, b) => Number(a.price_usd) - Number(b.price_usd));
-    } else {
-      results.sort((a, b) => Number(b.price_usd) - Number(a.price_usd));
-    }
-  };
-
-  //sort by percent
-  const handlePercentId = () => {
-    setPercent(!percent);
-    if (percent === true) {
-      results.sort((a, b) => Number(a.price_usd) - Number(b.price_usd));
-    } else {
-      results.sort((a, b) => Number(b.price_usd) - Number(a.price_usd));
-    }
-  };
-
   return (
     <>
       <div className="w-[550px] md:w-[900px] xl:w-[1200px] mx-auto">
@@ -90,11 +58,11 @@ function Table({ results }) {
                   <span className="pl-1 pt-1 text-blue-400">
                     {id ? (
                       <AiOutlineArrowDown
-                        onClick={() => handleSortId(id, "id")}
+                        onClick={() => handleSortNumbers(id, "id")}
                       />
                     ) : (
                       <AiOutlineArrowUp
-                        onClick={() => handleSortId(id, "id")}
+                        onClick={() => handleSortNumbers(id, "id")}
                       />
                     )}
                   </span>
@@ -123,11 +91,11 @@ function Table({ results }) {
                     <span className="pl-1 pt-1 text-blue-400">
                       {rank ? (
                         <AiOutlineArrowDown
-                          onClick={() => handleSortId(rank, "rank")}
+                          onClick={() => handleSortNumbers(rank, "rank")}
                         />
                       ) : (
                         <AiOutlineArrowUp
-                          onClick={() => handleSortId(rank, "rank")}
+                          onClick={() => handleSortNumbers(rank, "rank")}
                         />
                       )}
                     </span>
@@ -142,11 +110,11 @@ function Table({ results }) {
                     <span className="pl-1 pt-1 text-blue-400">
                       {price ? (
                         <AiOutlineArrowDown
-                          onClick={() => handleSortId(price, "price_usd")}
+                          onClick={() => handleSortNumbers(price, "price_usd")}
                         />
                       ) : (
                         <AiOutlineArrowUp
-                          onClick={() => handleSortId(price, "price_usd")}
+                          onClick={() => handleSortNumbers(price, "price_usd")}
                         />
                       )}
                     </span>
@@ -162,13 +130,13 @@ function Table({ results }) {
                       {percent ? (
                         <AiOutlineArrowDown
                           onClick={() =>
-                            handleSortId(percent, "percent_change_24h")
+                            handleSortNumbers(percent, "percent_change_24h")
                           }
                         />
                       ) : (
                         <AiOutlineArrowUp
                           onClick={() =>
-                            handleSortId(percent, "percent_change_24h")
+                            handleSortNumbers(percent, "percent_change_24h")
                           }
                         />
                       )}
@@ -185,12 +153,16 @@ function Table({ results }) {
                       {priceBtc ? (
                         <AiOutlineArrowDown
                           className="ml-2"
-                          onClick={() => handleSortId(priceBtc, "price_btc")}
+                          onClick={() =>
+                            handleSortNumbers(priceBtc, "price_btc")
+                          }
                         />
                       ) : (
                         <AiOutlineArrowUp
                           className="ml-2"
-                          onClick={() => handleSortId(priceBtc, "price_btc")}
+                          onClick={() =>
+                            handleSortNumbers(priceBtc, "price_btc")
+                          }
                         />
                       )}
                     </span>
@@ -207,13 +179,13 @@ function Table({ results }) {
                         <AiOutlineArrowDown
                           className=""
                           onClick={() =>
-                            handleSortId(marketUsd, "market_cap_usd")
+                            handleSortNumbers(marketUsd, "market_cap_usd")
                           }
                         />
                       ) : (
                         <AiOutlineArrowUp
                           onClick={() =>
-                            handleSortId(marketUsd, "market_cap_usd")
+                            handleSortNumbers(marketUsd, "market_cap_usd")
                           }
                         />
                       )}
