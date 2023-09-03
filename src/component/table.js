@@ -11,6 +11,7 @@ function Table({ results }) {
   const [price, setPrice] = useState(true);
   const [percent, setPercent] = useState(true);
   const [priceBtc, setPriceBtc] = useState(true);
+  const [marketUsd, setMarketUsd] = useState(true);
 
   // sort by id
   const handleSortId = (att, val) => {
@@ -24,6 +25,8 @@ function Table({ results }) {
       setPercent(!att);
     } else if (val === "price_btc") {
       setPriceBtc(!att);
+    } else if (val === "market_cap_usd") {
+      setMarketUsd(!att);
     }
     if (att === true) {
       results.sort((a, b) => Number(a[val]) - Number(b[val]));
@@ -176,24 +179,46 @@ function Table({ results }) {
                   scope="col"
                   className="text-sm font-medium text-gray-900 px-2 py-4 text-left"
                 >
-                  Price(BTC)
-                  <span className=" text-blue-400">
-                    {priceBtc ? (
-                      <AiOutlineArrowDown
-                        onClick={() => handleSortId(priceBtc, "price_btc")}
-                      />
-                    ) : (
-                      <AiOutlineArrowUp
-                        onClick={() => handleSortId(priceBtc, "price_btc")}
-                      />
-                    )}
+                  <span className="flex items-center justify-start">
+                    Price(BTC)
+                    <span className=" text-blue-400">
+                      {priceBtc ? (
+                        <AiOutlineArrowDown
+                          className="ml-2"
+                          onClick={() => handleSortId(priceBtc, "price_btc")}
+                        />
+                      ) : (
+                        <AiOutlineArrowUp
+                          className="ml-2"
+                          onClick={() => handleSortId(priceBtc, "price_btc")}
+                        />
+                      )}
+                    </span>
                   </span>
                 </th>
                 <th
                   scope="col"
                   className="text-sm font-medium text-gray-900 px-2 py-4 text-left"
                 >
-                  Market Cap(USD)
+                  <span className="flex items-center justify-start">
+                    Market Cap(USD)
+                    <span className=" text-blue-400 w-3">
+                      {marketUsd ? (
+                        <AiOutlineArrowDown
+                          className=""
+                          onClick={() =>
+                            handleSortId(marketUsd, "market_cap_usd")
+                          }
+                        />
+                      ) : (
+                        <AiOutlineArrowUp
+                          onClick={() =>
+                            handleSortId(marketUsd, "market_cap_usd")
+                          }
+                        />
+                      )}
+                    </span>
+                  </span>
                 </th>
               </tr>
             </thead>
@@ -219,7 +244,7 @@ function Table({ results }) {
                   <td className="text-sm text-gray-900 font-light px-2 py-4 ">
                     {result.price_btc}
                   </td>
-                  <td className="text-sm text-gray-900 font-light px-2 py-4 ">
+                  <td className="text-sm text-gray-900 font-light px-2 py-4 w-36">
                     {result.market_cap_usd}
                   </td>
                 </tr>
