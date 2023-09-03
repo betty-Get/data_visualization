@@ -9,7 +9,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("https://api.coinlore.net/api/tickers/");
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}`);
       setData(res.data.data);
     } catch (error) {
       console.log(error);
