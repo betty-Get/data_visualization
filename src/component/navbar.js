@@ -1,3 +1,4 @@
+import React from "react";
 import { CiSearch } from "react-icons/ci";
 import {
   RiDeleteBin6Line,
