@@ -9,7 +9,9 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/api/tickers/`
+      );
       setData(res.data.data);
     } catch (error) {
       console.log(error);
